@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ed.concurrency.cdemo.mapper.SecKillMapper">
+    <resultMap id="secGoodsMap" type="com.ed.concurrency.cdemo.bean.SecKillGoods">
+        <result column="id" property="id"/>
+        <result column="good_id" property="goodsId"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="stock_count" property="stockCount"/>
+    </resultMap>
+
+    <select id="querySecKillDetail" resultMap="secGoodsMap">
+        select id, good_id, start_date, end_date, stock_count
+        from seckill_goods_list
+        where good_id = #{goodsId}
+    </select>
+
+    <update id="SecKillGoods">
+        update seckill_goods_list
+        set stock_count = stock_count - 1
+        where good_id = #{secId} and stock_count > 0
+
+    </update>
+
+    <insert id="CreateSecOrder">
+        insert into seckill_order_list
+        (user_id, order_id, goods_id)
+        VALUES
+        (#{userId}, #{orderId}, #{secId})
+    </insert>
+
+
+    <select id="queryAllGoods" resultMap="secGoodsMap">
+        select id, good_id, start_date, end_date, stock_count
+        from seckill_goods_list
+    </select>
+
+    <resultMap id="secOrderMap" type="com.ed.concurrency.cdemo.bean.SecKillOrder">
+        <result column="user_id" property="userId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="order_id" property="orderId"/>
+    </resultMap>
+
+    <select id="querySecKillOrder" resultMap="secOrderMap">
+        select id
+        from seckill_order_list
+        where user_id = #{userId}
+    </select>
+
+</mapper>
