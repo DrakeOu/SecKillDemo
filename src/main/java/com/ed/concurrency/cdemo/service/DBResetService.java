@@ -1,6 +1,7 @@
 package com.ed.concurrency.cdemo.service;
 
 import com.ed.concurrency.cdemo.bean.SecKillGoods;
+import com.ed.concurrency.cdemo.bean.SecKillOrder;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ public interface DBResetService {
 
     public int clearOrders(String secId);
 
-    public List<SecKillGoods> countFromOrders();
+    public List<SecKillOrder> countFromOrders();
 }

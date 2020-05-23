@@ -19,7 +19,6 @@
         update seckill_goods_list
         set stock_count = stock_count - 1
         where good_id = #{secId} and stock_count > 0
-
     </update>
 
     <insert id="CreateSecOrder">

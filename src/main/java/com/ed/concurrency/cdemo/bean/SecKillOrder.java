@@ -4,7 +4,7 @@ public class SecKillOrder {
 
     private Long id;
     private Long userId;
-    private Long orderId;
+    private String orderId;
     private Long goodsId;
 
     public Long getId() {
@@ -23,11 +23,11 @@ public class SecKillOrder {
         this.userId = userId;
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

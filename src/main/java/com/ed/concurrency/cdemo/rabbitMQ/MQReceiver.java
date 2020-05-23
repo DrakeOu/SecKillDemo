@@ -13,36 +13,36 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class MQReceiver {
-    private static Logger log = LoggerFactory.getLogger(MQReceiver.class);
-
-    @Autowired
-    SecKillService secKillService;
-
-    @Autowired
-    RedisService redisService;
-
-    @RabbitListener(queues = MQConfig.SEC_KILL_QUEUE)
-    public void receive(String message){
-        log.info("receive message:"+message);
-        SecKillMessage secKillMessage = RedisService.stringToBean(message, SecKillMessage.class);
-        //取出数据
-        User user = secKillMessage.getUser();
-        String secId = secKillMessage.getSecId();
-
-        try{
-            secKillService.SecKillGoods(user, secId);
-        }catch (Exception e){
-            if("请勿重复购买".equals(e.getMessage())){
-                //重复购买，复原库存,内存标记
-                redisService.incr(secId);
-                SecKillController.proMap.put(secId, false);
-            }
-            log.info(e.getMessage());
-        }
-
-
-    }
-
-}
+//@Service
+//public class MQReceiver {
+//    private static Logger log = LoggerFactory.getLogger(MQReceiver.class);
+//
+//    @Autowired
+//    SecKillService secKillService;
+//
+//    @Autowired
+//    RedisService redisService;
+//
+//    @RabbitListener(queues = MQConfig.SEC_KILL_QUEUE)
+//    public void receive(String message){
+//        log.info("receive message:"+message);
+//        SecKillMessage secKillMessage = RedisService.stringToBean(message, SecKillMessage.class);
+//        //取出数据
+//        User user = secKillMessage.getUser();
+//        String secId = secKillMessage.getSecId();
+//
+//        try{
+//            secKillService.SecKillGoods(user, secId);
+//        }catch (Exception e){
+//            if("请勿重复购买".equals(e.getMessage())){
+//                //重复购买，复原库存,内存标记
+//                redisService.incr(secId);
+//                SecKillController.proMap.put(secId, false);
+//            }
+//            log.info(e.getMessage());
+//        }
+//
+//
+//    }
+//
+//}

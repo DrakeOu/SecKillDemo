@@ -1,6 +1,7 @@
 package com.ed.concurrency.cdemo.mapper;
 
 import com.ed.concurrency.cdemo.bean.SecKillGoods;
+import com.ed.concurrency.cdemo.bean.SecKillOrder;
 import io.lettuce.core.dynamic.annotation.Param;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface DBResetMapper {
 
     public int clearOrders(String secId);
 
-    public List<SecKillGoods> countFromOrders();
+    public List<SecKillOrder> countFromOrders();
 }

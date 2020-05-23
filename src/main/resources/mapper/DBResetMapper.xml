@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ed.concurrency.cdemo.mapper.DBResetMapper">
 
-    <resultMap id="secGoodsMap" type="com.ed.concurrency.cdemo.bean.SecKillGoods">
+    <resultMap id="secGoodsMap" type="com.ed.concurrency.cdemo.bean.SecKillOrder">
         <result column="id" property="id"/>
         <result column="goods_id" property="goodsId"/>
-        <result column="start_date" property="startDate"/>
-        <result column="end_date" property="endDate"/>
-        <result column="stock_count" property="stockCount"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_id" property="orderId"/>
+
     </resultMap>
 
     <update id="ResetDB">
@@ -23,8 +23,7 @@
     </delete>
 
     <select id="countFromOrders" resultMap="secGoodsMap">
-        select count(*) as 'stock_count', goods_id
+        select id, user_id, order_id, goods_id
         from seckill_order_list
-        group by goods_id
     </select>
 </mapper>

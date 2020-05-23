@@ -40,6 +40,16 @@ public class RedisService {
     }
 
 
+    public Long del(String key){
+        Jedis jedis = null;
+        try{
+            jedis = jedisPool.getResource();
+            return jedis.del(key);
+        }finally {
+            returnToPool(jedis);
+        }
+    }
+
     public Long incr(String key){
         Jedis jedis = null;
         try{

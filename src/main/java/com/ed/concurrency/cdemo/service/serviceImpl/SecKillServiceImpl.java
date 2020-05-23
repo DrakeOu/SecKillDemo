@@ -37,8 +37,8 @@ public class SecKillServiceImpl implements SecKillService {
     @Override
     public void SecKillGoods(User user, String secId) {
         //检查是否重复秒杀，这个方法不是同步的，主要依赖mysql的unique索引保证不会重复秒杀
-        String existOrder = redisService.get(RedisConfig.ORDER_PREFIX + user.getId());
-        if(existOrder!=null){
+        String existOrder = redisService.get(RedisConfig.ORDER_PREFIX + user.getId()+secId);
+        if(!"".equals(existOrder)){
             throw new RuntimeException("请勿重复购买");
         }
         // MyBatis中类似update这种没有返回值的操作是可以返回一个int表示更改的行数，可以用来判断操作是否执行
@@ -55,7 +55,7 @@ public class SecKillServiceImpl implements SecKillService {
             throw new RuntimeException("请勿重复购买");
         }
         //将订单写到redis缓存中
-        redisService.set(RedisConfig.ORDER_PREFIX+user.getId().toString(), orderId);
+        redisService.set(RedisConfig.ORDER_PREFIX+user.getId().toString()+secId, orderId);
         //先不创建真实的订单
 //        mapper.CreateOrder(String.valueOf(user.getId()), secId, orderId);
     }

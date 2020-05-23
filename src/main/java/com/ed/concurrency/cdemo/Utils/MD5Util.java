@@ -2,6 +2,8 @@ package com.ed.concurrency.cdemo.Utils;
 
 import org.springframework.util.DigestUtils;
 
+import java.security.MessageDigest;
+
 public class MD5Util {
 
     public static String md5(String src){
@@ -26,10 +28,39 @@ public class MD5Util {
         String dbPass = formPassToDBPass(formPass, saltDB);
         return dbPass;
     }
+    public static String Md5ForUrl(String url) {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(url.getBytes("UTF-8"));
+            byte[] b = md5.digest();
+
+            int i;
+            StringBuffer buf = new StringBuffer();
+            for(int offset = 0, len = b.length; offset < len; offset++) {
+                i = b[offset];
+                if(i < 0) {
+                    i += 256;
+                }
+                if(i < 16) {
+                    buf.append("0");
+                }
+                buf.append(Integer.toHexString(i));
+            }
+            url = buf.toString();
+            System.out.println("result = " + url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
 
     public static void main(String[] args) {
-        String password = "abcdefg123";
-        System.out.println(formPassToDBPass(password, "1a2b3c"));
+//        String password = "abcdefg123";
+//        System.out.println(formPassToDBPass(password, "1a2b3c"));
+        String url = "seckill/01";
+        System.out.println(Md5ForUrl(url));
+        //34b079807e0a4de60524b211ed893dfc
     }
 
 }

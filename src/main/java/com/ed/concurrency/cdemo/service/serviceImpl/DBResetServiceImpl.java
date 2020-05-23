@@ -1,6 +1,7 @@
 package com.ed.concurrency.cdemo.service.serviceImpl;
 
 import com.ed.concurrency.cdemo.bean.SecKillGoods;
+import com.ed.concurrency.cdemo.bean.SecKillOrder;
 import com.ed.concurrency.cdemo.mapper.DBResetMapper;
 import com.ed.concurrency.cdemo.service.DBResetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class DBResetServiceImpl implements DBResetService {
     }
 
     @Override
-    public List<SecKillGoods> countFromOrders() {
+    public List<SecKillOrder> countFromOrders() {
         return dbResetMapper.countFromOrders();
     }
 }

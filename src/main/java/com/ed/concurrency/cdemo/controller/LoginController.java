@@ -7,13 +7,11 @@ import com.ed.concurrency.cdemo.redisService.RedisService;
 import com.ed.concurrency.cdemo.result.Result;
 import com.ed.concurrency.cdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+@CrossOrigin
 @RestController
 public class LoginController {
 
